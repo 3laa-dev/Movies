@@ -1,8 +1,9 @@
 import Card from "react-bootstrap/Card";
-import axios from "axios";
+import {Link} from "react-router-dom"
 
 function HoverCard({movie}) {
   return (
+    <Link to={`/movie/${movie.id}`}>
     <Card className="text-white border-0 hover-card my-2">
       <Card.Img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="image" />
 
@@ -13,6 +14,7 @@ function HoverCard({movie}) {
         <Card.Text>Vote Average : {movie.vote_average}</Card.Text>
       </Card.ImgOverlay>
     </Card>
+    </Link>
   );
 }
 

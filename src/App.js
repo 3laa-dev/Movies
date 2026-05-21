@@ -1,9 +1,10 @@
 import { Container } from "react-bootstrap"
-import { useEffect, useState } from "react"
+import { useEffect, useState, } from "react"
 import NavBar from "./components/NavBar";
 import Cards from "./components/cards";
 import axios from "axios";
-
+import Movie from "./components/movie";
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 
 
@@ -11,7 +12,7 @@ import axios from "axios";
 function App() {
   const [movies, setMovies] = useState([]);
   const [pageCount, setPageCount] = useState(0);
-  const [searchValue , setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState("");
 
   const getAllMovies = async () => {
     const res = await axios("https://api.themoviedb.org/3/movie/popular?api_key=9212ecc5bf4434d56dab8706a08ef6e5")
@@ -48,10 +49,18 @@ function App() {
     <div className="">
       <NavBar search={search} />
       <Container>
-        <Cards movies={movies} paginate={paginate} pageCount={pageCount} />
+
+
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Cards movies={movies} paginate={paginate} pageCount={pageCount} />}></Route>
+            <Route path="/movie/:id" element={<Movie />}></Route>
+          </Routes>
+        </BrowserRouter>
       </Container>
 
     </div>
+
   );
 }
 
